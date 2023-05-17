@@ -1,0 +1,50 @@
+//整数二分模板
+//当 l = mid 的时候，二分中点为l + r + 1 << 1
+//反之， r = mid, l + r << 1
+
+#include<iostream>
+#include<cstdio>
+
+using namespace std;
+const int N = 1e6+10;
+
+int n,m;
+int q[N];
+
+int main(){
+    scanf("%d%d", &n, &m);
+    for(int i=0; i<n; i++){
+        scanf("%d", &q[i]);
+    }
+    
+    while(m--){
+        int x;
+        scanf("%d", &x);
+        int l=0, r=n-1;
+        while(l<r){
+            int mid = l+r>>1;
+            if(q[mid]>=x){
+                r = mid;
+            }else{
+                l = mid+1;
+            }
+        }
+        if(q[l] != x){
+            cout<<"-1 -1"<<endl;
+        }else{
+            cout<<l<<" ";
+            int l=0, r=n-1;
+            while(l<r){
+                int mid = l+r+1>>1;
+                if(q[mid]<=x){
+                    l = mid;
+                }else{
+                    r = mid-1;
+                }
+            }
+            cout<<l<<endl;
+        }
+        
+    }
+    return 0;
+}
